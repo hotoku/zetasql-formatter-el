@@ -31,7 +31,21 @@
 ;;;###autoload
 (defun zsfm-format ()
   "Format sql in the buffer."
-  (message "hoge"))
+  (interactive)
+  (when zsfm-do-format
+    (let* ((curbuf (current-buffer))
+           (current (point))
+           (outbuf-name "*zetasql*")
+           (outbuf (get-buffer outbuf-name))
+           (fpath (buffer-file-name))
+           (command (zsfm-command fpath)))
+      (when outbuf
+        (save-excursion
+          (switch-to-buffer outbuf)
+          (erase-buffer)))
+      (let ((ret (call-process-shell-command command nil outbuf-name)))
+        (if (not (= ret 0))
+            ())))))
 
 
 ;;;###autoload
