@@ -4,7 +4,7 @@
 
 ;; Author: Yasunori Horikoshi <horikoshi.et.al@gmail.com>
 ;; Keywords: lisp
-;; Version: 1.0.0
+;; Version: 1.0.1
 
 
 ;;; Commentary:
