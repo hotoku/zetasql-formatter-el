@@ -55,10 +55,10 @@
 
 
 ;;;###autoload
-(add-hook 'sql-mode-hook
-          '(lambda ()
-             (when (executable-find "docker")
-               (add-hook 'after-save-hook'zsfm-format nil t))))
+(when (executable-find "docker")
+  (add-hook 'sql-mode-hook
+            '(lambda ()
+               (add-hook 'after-save-hook 'zsfm-format nil t))))
 
 (provide 'zetasql-formatter-mode)
 ;;; zetasql-formatter-mode.el ends here
