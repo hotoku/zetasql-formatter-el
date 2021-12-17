@@ -4,16 +4,13 @@
 
 ;; Author: Yasunori Horikoshi <horikoshi.et.al@gmail.com>
 ;; Keywords: lisp
-;; Version: 1.0.1
+;; Version: 1.0.2
 
 
 ;;; Commentary:
 
 
 ;;; Code:
-
-(define-minor-mode zetasql-formatter-mode
-  "Format query by zetasql-formatter before saving the buffer.")
 
 (defgroup zetasql-formatter nil
   "Format query by zetasql-formatter before saving the buffer."
