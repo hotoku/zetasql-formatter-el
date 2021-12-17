@@ -1,10 +1,10 @@
-;;; zetasql-formatter-mode.el ---  -*- lexical-binding: t -*-
+;;; zetasql-formatter.el ---  -*- lexical-binding: t -*-
 
 ;; Copyright (C) 2021 Yasunori Horikoshi
 
 ;; Author: Yasunori Horikoshi <horikoshi.et.al@gmail.com>
 ;; Keywords: lisp
-;; Version: 1.0.2
+;; Version: 1.0.4
 
 
 ;;; Commentary:
@@ -57,5 +57,5 @@
             '(lambda ()
                (add-hook 'after-save-hook 'zsfm-format nil t))))
 
-(provide 'zetasql-formatter-mode)
-;;; zetasql-formatter-mode.el ends here
+(provide 'zetasql-formatter)
+;;; zetasql-formatter.el ends here
