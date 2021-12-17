@@ -27,6 +27,13 @@
   :local t
   :safe 'booleanp)
 
+(defun zsfm-command (fpath)
+  "Return zetasql-formatter command with argument FPATH."
+  (let ((fname (file-name-nondirectory fpath))
+        (dname (file-name-directory fpath)))
+    (format "docker run --rm -v %s:/home:Z matts966/zetasql-formatter:latest %s"
+            dname fname)))
+
 
 ;;;###autoload
 (defun zsfm-format ()
@@ -34,24 +41,24 @@
   (interactive)
   (when zsfm-do-format
     (let* ((curbuf (current-buffer))
-           (current (point))
            (outbuf-name "*zetasql*")
            (outbuf (get-buffer outbuf-name))
            (fpath (buffer-file-name))
            (command (zsfm-command fpath)))
+      (message "command=%s" command)
       (when outbuf
-        (save-excursion
-          (switch-to-buffer outbuf)
-          (erase-buffer)))
-      (let ((ret (call-process-shell-command command nil outbuf-name)))
-        (if (not (= ret 0))
-            ())))))
+        (switch-to-buffer outbuf)
+        (erase-buffer)
+        (switch-to-buffer curbuf))
+      (call-process-shell-command command nil outbuf-name)
+      (revert-buffer t t))))
 
 
 ;;;###autoload
 (add-hook 'sql-mode-hook
           '(lambda ()
-             (add-hook 'before-save-hook 'zsfm-format nil t)))
+             (when (executable-find "docker")
+               (add-hook 'after-save-hook'zsfm-format nil t))))
 
 (provide 'zetasql-formatter-mode)
 ;;; zetasql-formatter-mode.el ends here
